@@ -1,0 +1,156 @@
+---
+title: "reso"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{reso}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(reso)
+```
+
+# reso: An esoteric R-based programming style
+
+### Introduction 
+
+Have you ever been frustrated at R, maybe after reading too many rude
+Stackoverflow or R-help threads? (me too) Well, what if we took R and instead
+of helping making it accessible and fun, made all of those esoteric,
+argon-y, incredibly annoying, and unreadable parts much worse?
+
+Enter \code{reso}, a library and R-package programming style Only the
+following symbols from R are allowed:
+
+(), [], !, 0, +, and "," (the comma).
+
+Along with four functions that are needed to make reso do its thing:
+
+s(): 
+p(): 
+x(): 
+d(): an alias for \code{\link[base]{deparse}}
+
+### How it works
+
+This package 
+
+### An example
+
+Goal: Generate the output
+ 
+```{r}
+c(0, 1)
+```
+
+Let's start by getting just the letter "c" as a string: 
+1. Produce `character(0)` by generating an empty string with R's `paste` or reso's `p`, then get the 0th element of that result. 
+2. Convert the value `character(0)` into character, e.g. `"character(0)"`. This can be done with R's `deparse` or reso's `d`. 
+3. Get the first letter of "character(0)", via R's `substr` or reso's `s`. 
+
+Those steps as code: 
+
+```{r}
+p()[0]
+d(0[0])
+s(d(p()[0]))
+```
+
+Next, we'd want to turn this string into the R expression `c(0, 1)`. To do this, we can: 
+
+1. Force R to interpret "c" as the native function `c`, by using `parse` and then `eval` in R, or using the `x` function^[for "execute", or "expression." Your choice :)] in reso. 
+2. Generate 1 by coercing 0 to `TRUE` with `!0`, and combining `TRUE` with `numeric(0)` to force `TRUE` to be numeric (or 1). This requires our new version of `c()`.
+3. Combine all of our above steps with a set of parens and a 0!
+
+```{r}
+x(s(d(p()[0])))
+x(s(d(p()[0])))(!0, 0[0])
+x(s(d(p()[0])))(0, x(s(d(p()[0])))(!0, 0[0]))
+```
+
+Yay! 
+
+The general pattern is similar. We can often:
+
+1. Find a hacky way to coerce values to built-in objects, like `FALSE` or `logical(0)`
+2. Coerce that value to a string with `d()`
+3. Pull a letter of that string out with `s()`
+4. Repeat and combine with `p()` until we can make a function name
+5. Evaluate the string as an R expression with `x()`. 
+
+### Expanding to almost the entire R universe
+
+#### Part 1: The alphabet
+
+This could have been a bit of a puzzle to figure out, and potentially impossible. R has a fair number of native values, but many letters are just hard to figure out or produce via type coercion. 
+
+Luckily, R provides an object that makes this almost trivial: the `letters` array! 
+
+To get it, we need: 
+
+1. "l", from `logical(0)`
+2. Two "e"s, from `integer(0)`
+3. Two "t"s, from `integer(0)`
+4. One "r", from `integer(0)`
+5. One "s", from the eleventh letter of the deparse function expression for `s()`.^[If you can think of a better way, let me know :')] 
+
+The code representation of this is below. `c()` and 1 are used instead of `x(s(d(p()[0])))(!0, 0[0])` and `x(s(d(p()[0])))` for readability^[LOL]
+
+```{r}
+s(d(!0[0])) # the first letter of "logical(0)", or "l"
+c()+!0 # makes integer(0) by adding TRUE and NULL
+s(d(c()+!0),1+1+1+1) #integer(0) -> "integer(0)" -> "e"
+s(d(c()+!0),1+1+1) #"t"
+s(d(c()+!0),1+1+1+1+1+1+1) #"r"
+s(d(s)[1], 1+1+1+1+1+1+1+1+1+1+1) #"s"
+
+#combining
+x(p(
+  s(d(!0[0])),
+  s(d(c()+!0),4),
+  s(d(c()+!0), 3),
+  s(d(c()+!0),3),
+  s(d(c()+!0),4),
+  s(d(c()+!0),7),
+  s(d(s)[1], 11)
+))
+```
+
+We can subset letters from here
+
+
+```{r, eval = F}
+p(s(c())) # produces an empty string
+0[0] # produces numeric(0)
+c(!0, 0[0]) # produces 1 by combining TRUE with numeric(0), which forces TRUE to numeric. 
+c(0, p(s(c())))[1] #coerce first argument to a character
+```
+
+### Part 2: Non-alphabetical characters
+
+The last trick in getting this to be an almost-all-of-R style is in using the `builtins` vector. `builtins` contains the names of all built-in functions in R, many of which include non-alphabetical operators like +, -, (, :, and so on. You could subset the builtins array for these, which would then unlock the door to almost all of R. 
+
+It probably wouldn't be exactly all. R's "syntactic sugar" elements, like `2 - 1` instead of `"-"(2, 1)`, would be missing from this style. There could be possible side effects of using `eval` and `parse` that I'm unaware of. Probably the biggest limitation is that the runner for reso literally rejects any characters besides the allowed ones, so the creation of new variables via either `assign()` or `<-` is not allowed. 
+
+But hey, we get a lot from just twelve characters!
+
+### Some notes about motivation and learning
+
+This is not meant to be a useful or practical programming tool. It is meant to show the opposite, that being esoteric is useless and using simpler, abstracted logic can ^[of course, it was also just a fun/silly little side project for myself.]
+
+Compared to languages like JavaScript, R stands out in being more accessible and friendly. JavaScript programmers attempt to be as concise as possible, preferring arrow functions to jam as much code as possible into a single line. Logical operators like '&&' and '||' are used via a side effect as if statements themselves instead of just inside them. 
+
+R instead views being verbose as a feature. The base R libraries export thousands of functions to handle many general cases and provide a higher level of abstraction. Pipes in R are encouraged in order to demystify code and reduce mistakes, and tools like the R linter even encourage placing every statement after a pipe on a new line to encourage even more readability. 
+
+Of course, R still has to go a long way and JavaScript has had its own readability efforts for many years. 
+
+
+
