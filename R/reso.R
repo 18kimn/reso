@@ -8,13 +8,14 @@
 #' Enter \code{reso}, a library and R-package programming language. Only the
 #' following symbols from R are allowed:
 #'
-#' c, (), [], !, 0, +, and "," (the comma).
+#' (), [], !, 0, +, and "," (the comma).
 #'
-#' Along with four functions to make \code{reso} "go":
+#' Along with four functions to make \code{reso} "go." They are really
+#' just simplified and narrower versions of existing R utilities, and are:
 #'
-#' s():
-#' p():
-#' x():
+#' s(): An alias for substr(string, i). Used to get a letter from a string
+#' p(): An alias for paste(..., collapse = ""), to concatenate strings
+#' x(): Interpret and execute a string as an R expession
 #' d(): an alias for \code{\link[base]{deparse}}
 #'
-#' More can be read about these in the \link{reso-native functions} page.
+#' More can be read about these in the \link{reso-native functions} page

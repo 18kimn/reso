@@ -10,8 +10,8 @@
 #' c(p()) # ""
 #' d(character(0)) # "character(0)"
 #' x("1 + 1") # 2
+
 s <- function(string, i = 1){substr(string, i, i)}
 p <- function(...){paste0(..., collapse = "")}
 d <- function(...){deparse(...)}
 x <- function(expr){eval(parse(text = expr))}
-
