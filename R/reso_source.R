@@ -9,6 +9,8 @@
 #' @examples
 #' reso_source("x(s(d(p()[0])))")
 #' reso_source("x(s(d(p()[0])))(0,x(s(d(p()[0])))(!0,0[0]))")
+#' filename <- system.file("extdata", "example.reso", package = "reso")
+#' reso_source(filename)
 #' @export
 
 reso_source <- function(file){
