@@ -1,13 +1,14 @@
 Package: reso
-Title: What the Package Does (One Line, Title Case)
+Title: An Implementation of an Esoteric Programming Style for R
 Version: 0.1.0
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Nathan",
+           family = "Kim",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+           email = "nathanckim18@gmail.com",
+           comment = c(ORCID = "0000-0002-9558-3530"))
+URL: https://github.com/18kimn/reso
+Description: An implementation of an esoteric programming style for R, for completely educational purposes relating to code readability. Provides a format to write nearly any R code in just twelve characters, and contains two auxiliary functions to validate and run this code. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

@@ -4,7 +4,7 @@ reso: An esoteric R-based programming style
 ### Introduction
 
 Have you ever been frustrated at R, maybe after reading too many rude
-Stackoverflow or R-help threads? (me too) Well, what if we took R and
+StackOverflow or R-help threads? (me too) Well, what if we took R and
 instead of helping making it accessible and fun, made all of those
 esoteric, argon-y, incredibly annoying, and unreadable parts much worse?
 
@@ -18,12 +18,13 @@ following symbols from R are allowed:
 Along with four functions to make `reso` “go.” They are really just
 simplified and narrower versions of existing R utilities:
 
--   s(): An alias for substr(string, i). Used to get a letter from a
+-   s(): An alias for `substr(string, i)`. Used to get a letter from a
     string
 
--   p(): An alias for paste(…, collapse = ""), to concatenate strings
+-   p(): An alias for `paste(..., collapse = "")`, to concatenate
+    strings
 
--   x(): Interpret and execute a string as an R expession
+-   x(): Interpret and execute a string as an R expression
 
 -   d(): an alias for
     [deparse()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/deparse)
