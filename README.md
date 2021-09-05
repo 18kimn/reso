@@ -12,7 +12,7 @@ Enter `reso`, a library and R-based programming style. Only the
 following symbols from R are allowed:
 
 <p style="text-align:center">
-(), \[\], !, 0, +, and “,” (the comma).
+(), [, ], !, 0, +, and “,” (the comma).
 </p>
 
 Along with four functions to make `reso` “go.” They are really just
