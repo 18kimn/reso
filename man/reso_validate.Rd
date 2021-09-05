@@ -25,7 +25,8 @@ reso_validate("assign(a, b)") # these two fail with error
 reso_validate("x(s(d(p()))) + a")
 }
 
-reso_validate("assign(a, b)", soft = TRUE) #is invalid, but soft=TRUE prevents error and the function returns FALSE instead
+reso_validate("assign(a, b)", soft = TRUE) #is invalid, but
+# soft=TRUE prevents error and the function returns FALSE instead
 reso_validate("x(s(d(p()[0])))") # these two are valid code
 reso_validate("x(s(d(p()[0])))(0,x(s(d(p()[0])))(!0,0[0]))")
 }

@@ -1,5 +1,5 @@
 ---
-title: "reso"
+title: "reso: An esoteric R-based programming style"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{reso}
@@ -13,11 +13,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 devtools::load_all()
-library(reso)
-
 ```
-
-# reso: An esoteric R-based programming style
 
 ### Introduction 
 
@@ -68,8 +64,8 @@ Repeat ad infinitum until your code is completely nonsensical.
 
 There are some things that I'm not sure if the style can do as of now. 
 Probably the biggest issue is that a programmer can't save variables to the namespace.
-The `reso_validate()` function is super hacky, such that it just marks as valid those
-strings or file expressions which have only `reso` characters. This means the 
+The `reso_validate()` function is super hacky, so much so that it just marks as valid those
+strings or file expressions which have only `reso` characters. This means that 
 assignment to new characters is not allowed. It'd also break because the `d()` function operates 
 in the parent frame instead of in the global environment with no escape hatch. The parent 
 frame would most often be the context inside of `x()` and would be "forgotten" after execution,
@@ -79,13 +75,16 @@ meaning that variables can't really be saved.
 
 **Goal: Generate the output `[1] 0 1`** 
 
-Or in other words, the output we would receive if we were typing `c(0, 1)` in vanilla R. 
+In other words, create the output we would receive if we were typing `c(0, 1)` in vanilla R. 
 
 Let's start by getting just the letter "c" as a string, which we can do by:
+
 1. Produce `character(0)` by generating an empty string with R's 
 `paste` or reso's `p`, then get the 0th element of that result. 
+
 2. Convert the value `character(0)` into character, e.g. 
 `"character(0)"`. This can be done with R's `deparse` or reso's `d`. 
+
 3. Get the first letter of "character(0)", 
 via R's `substr` or reso's `s`. 
 
@@ -137,8 +136,8 @@ used instead of their `reso` equivalents for readability.^[LOL]
 ```{r}
 s(d(!0[0])) # the first letter of "logical(0)", or "l"
 c() + !0 # makes integer(0) by adding TRUE and NULL
-s(d(c() + !0, 4)) # turns integer(0) -> "integer(0)" -> "e"
-s(d(c() + !0), 4) #"t"
+s(d(c() + !0), 4) # turns integer(0) -> "integer(0)" -> "e"
+s(d(c() + !0), 3) #"t"
 s(d(c() + !0), 7) #"r"
 s(d(s)[1], 11) #"s"
 
@@ -164,17 +163,13 @@ of all built-in functions in R, many of which include non-alphabetical
 operators like +, -, (, :, and so on. You could subset the builtins array
  for these, which would then unlock the door to almost all of R. 
 
-But hey, we get a lot from just twelve characters!
-
 ### Some notes about motivation and learning
 
-This is not meant to be a useful or practical programming tool. It is meant to show the opposite, that being esoteric is useless and using simpler, abstracted logic can ^[of course, it was also just a fun/silly little side project for myself.]
+This is not meant to be a useful or practical programming tool. It is meant to show the opposite, that being esoteric is useless and using simpler, abstracted logic can be way more helpful.^[of course, it was also just a fun/silly little side project for myself.]
 
-Compared to languages like JavaScript, R stands out in being more accessible and friendly. JavaScript programmers attempt to be as concise as possible, preferring arrow functions to jam as much code as possible into a single line. Logical operators like '&&' and '||' are used via a side effect as if statements themselves instead of just inside them. 
+Compared to languages like JavaScript, R stands out in being more accessible and friendly. Sometimes programmers attempt to be as concise as possible, preferring syntax like arrow functions to jam as much code as possible into a single line. Logical operators like '&&' and '||' are used via a side effect as if statements themselves instead of as just logical operators.
 
-R instead views being verbose as a feature. The base R libraries export thousands of functions to handle many general cases and provide a higher level of abstraction. Pipes in R are encouraged in order to demystify code and reduce mistakes, and tools like the R linter even encourage placing every statement after a pipe on a new line to encourage even more readability. 
+In contrast, the R community tends to view being verbose as a feature. The base R libraries export thousands of functions to handle many general cases and provide a higher level of abstraction. Pipes in R are encouraged in order to demystify code and reduce mistakes, and tools like the R linter even encourage placing every statement after a pipe on a new line to encourage even more readability. 
 
-Of course, R still has to go a long way and JavaScript has had its own readability efforts for many years. 
-
-
+Of course, R still has lots of room to improve in becoming accessible. Let's help each other get there by making the R community welcoming and fun!
 

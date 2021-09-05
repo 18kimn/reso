@@ -19,6 +19,8 @@ x(string)
 \item{string}{A character value}
 
 \item{i}{An integer value}
+
+\item{...}{Passed to \code{paste0} for \code{p()} or \code{deparse()} for \code{d()}.}
 }
 \description{
 This package contains four wrapper functions that make almost all of R
@@ -28,7 +30,8 @@ available, by allowing basic string manipulation and evaluation.
 \itemize{
 \item \code{s}: Given a \code{string} and a number \code{i}, returns the character at position \code{i} from \code{string}
 
-\item \code{p}: An alias for \code{paste0(...,collapse = "")}; essentially squashes items together into a single string.
+\item \code{p}: An alias for \code{paste0(...,collapse = "")}; essentially squashes
+items together into a single string.
 
 \item \code{d}: An alias for \code{deparse(...)}; converts an R expression into a literal string.
 
